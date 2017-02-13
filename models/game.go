@@ -6,6 +6,8 @@ import (
   "log"
 )
 
+const K_FACTOR float64 = 20.0
+
 type Game struct {
   Model
   Winner Player `gorm:"ForeignKey:WinnerId" json:"winner"`
@@ -23,6 +25,7 @@ type Game struct {
   Date int `json:"date"`
 }
 
+/* Convert struct to JSON */
 func (g *Game) ToJSON() interface{} {
   data, game := make(map[string]interface{}), make(map[string]interface{})
 
@@ -45,9 +48,10 @@ func diff(winnerRating int, loserRating int) int {
   outcome := 1.0
 
   expected := 1.0 / (1 + math.Pow(10, float64(loserRating - winnerRating) / 400.0))
-  return int(kFactor * (outcome - expected))
+  return int(K_FACTOR * (outcome - expected))
 }
 
+/* Create new NBA 2K game between two players*/
 func (g Game) CreateNewGame() Game {
   var winner Player
   var loser Player
@@ -57,7 +61,6 @@ func (g Game) CreateNewGame() Game {
   if g.WinnerPoints <= g.LoserPoints {
     log.Fatalln("Winner's score must be greater than loser's score")
   }
-
 
   rating_diff := diff(winner.Rating, loser.Rating)
   winner.Rating += rating_diff 

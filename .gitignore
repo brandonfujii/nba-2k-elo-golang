@@ -1,5 +1,5 @@
 # Environment
-bin/init.go
+.env
 
 # Binaries for programs and plugins
 *.exe
