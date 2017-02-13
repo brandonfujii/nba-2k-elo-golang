@@ -5,10 +5,6 @@ import (
   "encoding/json"
 )
 
-// type Errors struct {
-//   Errors []*HttpError `json:"errors"`
-// }
-
 type HttpError struct {
   Status  int    `json: "status"`
   Title   string `json: "title"`

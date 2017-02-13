@@ -15,5 +15,6 @@ func init() {
 
   Env.DBUser = os.Getenv("DB_USER")
   Env.DBPassword = os.Getenv("DB_PASS")
+  Env.DBName = os.Getenv("DB_NAME")
 
 }

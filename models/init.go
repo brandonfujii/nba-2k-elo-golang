@@ -15,7 +15,7 @@ var DB *gorm.DB
 
 func init() {
   var err interface{}
-  DB, err = gorm.Open("mysql", config.Env.DBUser + ":" + config.Env.DBPassword + "@/2K?charset=utf8&parseTime=True&loc=Local")
+  DB, err = gorm.Open("mysql", config.Env.DBUser + ":" + config.Env.DBPassword + "@/" +  config.Env.DBName + "?charset=utf8&parseTime=True&loc=Local")
   if err != nil {
     panic(err) // AAAAAAAAA
   }
