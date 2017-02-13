@@ -1,7 +1,7 @@
 package main
 
 import (
-  "github.com/brandonfujii/nba-2k-elo-golang/routes"
+  "../2KELO/routes"
   _ "net/http/pprof"
   "net/http"
   "log"

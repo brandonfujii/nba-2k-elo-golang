@@ -1,3 +1,8 @@
-bin/env.go
-.DS_Store
-*.log
+# Environment
+bin/init.go
+
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib

@@ -1,16 +1,22 @@
 package models
 
 import (
-  "os"
   "github.com/jinzhu/gorm"
   _ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
+type Model struct {
+  ID uint `gorm:"primary_key; AUTO_INCREMENT" json:"id"`
+}
+
+const initialRating int = 1300
+const kFactor float64 = 20.0
+var DB *gorm.DB 
 
 func init() {
-  db, err := gorm.Open("mysql", os.Getenv("DB_USER") + ":" + os.Getenv("DB_PASS") + "@/2K?charset=utf8&parseTime=True&loc=Local")
+  var err interface{}
+  DB, err = gorm.Open("mysql", "root:danfibjr360!@/2K?charset=utf8&parseTime=True&loc=Local")
   if err != nil {
     panic(err) // AAAAAAAAA
   }
 }
-
