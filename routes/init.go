@@ -9,6 +9,7 @@ import (
 func Router() *negroni.Negroni {
   n := negroni.New()
 
+  n.Use(negroni.NewLogger())
   n.Use(negroni.HandlerFunc(middleware.ConfigResponseMiddleware))
 
   r := mux.NewRouter()
@@ -18,6 +19,8 @@ func Router() *negroni.Negroni {
   PlayerRouter(r)
   GameRouter(r)
   n.UseHandler(r)
+
+  n.Use(negroni.HandlerFunc(middleware.HandleResponseMiddleware))
 
   return n
 }

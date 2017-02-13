@@ -41,17 +41,6 @@ func (g *Game) ToJSON() interface{} {
   return data
 }
 
-func (g Game) GetById(id uint) Game {
-  var game Game
-  DB.First(&game, id)
-
-  if DB.NewRecord(game) {
-    log.Fatalln("Could not find game with that ID")
-  }
-
-  return game
-}
-
 /* Calculates the Elo difference in rating between 
  * two players in a game 
  */
@@ -65,8 +54,8 @@ func diff(winnerRating int, loserRating int) int {
 func (g Game) CreateNewGame() Game {
   var winner Player
   var loser Player
-  winner = winner.GetById(g.WinnerId)
-  loser = loser.GetById(g.LoserId)
+  GetByID(&winner, g.WinnerId)
+  GetByID(&loser, g.LoserId)
 
   if g.WinnerPoints <= g.LoserPoints {
     log.Fatalln("Winner's score must be greater than loser's score")

@@ -1,7 +1,5 @@
 package models
 
-import "log"
-
 type Player struct {
   Model
   Username string `gorm:"size:255; not null; unique" json:"username"`
@@ -18,15 +16,4 @@ func (p Player) ToJSON() interface{} {
   data["player"] = player
 
   return data
-}
-
-func (p Player) GetById(id uint) Player {
-  var player Player
-  DB.First(&player, id)
-
-  if DB.NewRecord(player) {
-    log.Fatalln("Could not find player with that ID")
-  }
-
-  return player
 }

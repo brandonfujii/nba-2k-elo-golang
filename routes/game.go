@@ -35,7 +35,8 @@ func getGameById(rw http.ResponseWriter, req *http.Request) {
   game_id, _ := strconv.Atoi(mux.Vars(req)["id"])
   var game models.Game
 
-  game = game.GetById(uint(game_id))
+  models.GetByID(&game, uint(game_id))
+
   j, _ := json.Marshal(game.ToJSON())
 
   rw.Write(j)
