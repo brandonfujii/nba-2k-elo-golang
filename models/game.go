@@ -41,12 +41,22 @@ func (g *Game) ToJSON() interface{} {
   return data
 }
 
+func (g Game) GetById(id uint) Game {
+  var game Game
+  DB.First(&game, id)
+
+  if DB.NewRecord(game) {
+    log.Fatalln("Could not find game with that ID")
+  }
+
+  return game
+}
+
 /* Calculates the Elo difference in rating between 
  * two players in a game 
  */
 func diff(winnerRating int, loserRating int) int {
   outcome := 1.0
-
   expected := 1.0 / (1 + math.Pow(10, float64(loserRating - winnerRating) / 400.0))
   return int(K_FACTOR * (outcome - expected))
 }
