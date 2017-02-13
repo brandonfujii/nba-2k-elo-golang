@@ -14,12 +14,17 @@ func main() {
     &models.Game{}}
 
   for _, model := range _models {
+    if models.DB.HasTable(model) {
+      models.DB.DropTable(model)
+      fmt.Println("Dropped table for", reflect.TypeOf(model))
+    }
+  }
+
+  for _, model := range _models {
     if !models.DB.HasTable(model) {
-      fmt.Println("Creating table for", reflect.TypeOf(model), "...")
+      fmt.Println("Creating table for ", reflect.TypeOf(model), "...")
       models.DB.CreateTable(model)
       fmt.Println("Created table", reflect.TypeOf(model))
-    } else {
-      fmt.Println(reflect.TypeOf(model), "table already created")
     }
   }
 }

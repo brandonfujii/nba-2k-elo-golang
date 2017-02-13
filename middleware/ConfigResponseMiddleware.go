@@ -10,5 +10,5 @@ func ConfigResponseMiddleware(rw http.ResponseWriter, req *http.Request, next ht
   rw.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
   rw.Header().Set("Access-Control-Allow-Headers",
     "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
- next(rw, req)
+  next(rw, req)
 }
